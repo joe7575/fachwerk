@@ -49,8 +49,11 @@ for idx,png in ipairs(StonesPNG) do
 end
 
 register_node("X5", " Beam", {"fachwerk7.png", "fachwerk8.png", "fachwerk7.png", "fachwerk8.png", "fachwerk7.png", "fachwerk8.png"})
-register_node("F", " Schindel", {"fachwerkF.png", "fachwerkF.png", "fachwerkF.png", "fachwerkF.png", "fachwerkF.png", "fachwerkF.png"})
-register_node("pflaster", " Pflaster", {"fachwerk_pflaster.png", "fachwerk_pflaster.png", "fachwerk_pflaster.png", "fachwerk_pflaster.png", "fachwerk_pflaster.png", "fachwerk_pflaster.png"})
+register_node("W", " Holzwand", {"fachwerkW.png", "fachwerkW.png","fachwerkW.png", "fachwerkW.png", "fachwerkW.png^[transformR90", "fachwerkW.png^[transformR90"})
+register_node("F", " Schindel 1", {"fachwerkF.png"})
+register_node("S", " Schindel 2", {"fachwerkS.png"})
+register_node("pflaster", " Pflaster", {"fachwerk_pflaster.png"})
+register_node("Z", " Ziegel", {"fachwerkZ.png"})
 
 minetest.register_node("fachwerk:window1", {
 		description = "Fachwerk Window 1",
@@ -115,7 +118,7 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output = "fachwerk:pflaster",
+	output = "fachwerk:pflaster 4",
 	recipe = {{"default:cobble", "default:desert_cobble", "default:sandstone", "default:gravel"}}
 })
 
@@ -204,3 +207,30 @@ for idx,node in ipairs(StonesNode) do
 			{"", node, ""},
 			{"fachwerk:X5", "", "fachwerk:X5"}}})
 end	
+
+if minetest.get_modpath("moreblocks") then
+	
+	stairsplus:register_all("fachwerk", "pflaster", "fachwerk:pflaster", {
+		description="Fachwerk Pflaster",
+		groups={cracky=2, crumbly=2, choppy=2, not_in_creative_inventory=1},
+		tiles={"fachwerk_pflaster.png"},
+	})
+
+	stairsplus:register_all("fachwerk", "F", "fachwerk:F", {
+		description="Fachwerk Schindel 1",
+		groups={cracky=2, crumbly=2, choppy=2, not_in_creative_inventory=1},
+		tiles={"fachwerkF.png"},
+	})
+
+	stairsplus:register_all("fachwerk", "S", "fachwerk:S", {
+		description="Fachwerk Schindel 2",
+		groups={cracky=2, crumbly=2, choppy=2, not_in_creative_inventory=1},
+		tiles={"fachwerkS.png"},
+	})
+
+	stairsplus:register_all("fachwerk", "Z", "fachwerk:Z", {
+		description="Fachwerk Ziegel",
+		groups={cracky=2, crumbly=2, choppy=2, not_in_creative_inventory=1},
+		tiles={"fachwerkZ.png"},
+	})
+end
