@@ -75,6 +75,7 @@ minetest.register_node("fachwerk:window1", {
 			},
 		},
 		is_ground_content = false,
+		sounds = default.node_sound_wood_defaults(),
 })
 
 minetest.register_node("fachwerk:window2", {
@@ -97,6 +98,7 @@ minetest.register_node("fachwerk:window2", {
 			},
 		},
 		is_ground_content = false,
+		sounds = default.node_sound_wood_defaults(),
 })
 
 minetest.register_craft({
@@ -109,12 +111,40 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output = "fachwerk:P 4",
+	output = "fachwerk:F 4",
 	recipe = {
-		{"", "default:tree", "default:tree"},
-		{"", "default:tree", "default:tree"},
+		{"", "fachwerk:X5", "fachwerk:X5"},
+		{"", "fachwerk:X5", "fachwerk:X5"},
 		{"", "", ""},
 	}
+})
+
+minetest.register_craft({
+	output = "fachwerk:Z 2",
+	recipe = {
+		{"", "", ""},
+		{"default:clay_brick", "default:clay_brick", ""},
+		{"default:clay_brick", "default:clay_brick", ""},
+	}
+})
+
+minetest.register_craft({
+	output = "fachwerk:W 4",
+	recipe = {
+		{"", "default:pine_tree", "default:pine_wood"},
+		{"", "default:pine_wood", "default:pine_tree"},
+		{"", "", ""},
+	}
+})
+
+minetest.register_craft({
+	output = "fachwerk:S",
+	recipe = {{"fachwerk:F"}}
+})
+
+minetest.register_craft({
+	output = "fachwerk:F",
+	recipe = {{"fachwerk:S"}}
 })
 
 minetest.register_craft({
@@ -144,7 +174,7 @@ for idx,node in ipairs(StonesNode) do
 		output = "fachwerk:"..idx.."2 3",
 		recipe = {
 			{"", "", ""},
-			{"fachwerk:X5", node, "fachwerk:X5"},
+			{"fachwerk:X5", node, ""},
 			{"", "", ""}}})
 	minetest.register_craft({
 		output = "fachwerk:"..idx.."3 2",
@@ -174,6 +204,12 @@ for idx,node in ipairs(StonesNode) do
 		output = "fachwerk:"..idx.."7 5",
 		recipe = {
 			{"", "fachwerk:X5", ""},
+			{"fachwerk:X5", node, "fachwerk:X5"},
+			{"", "fachwerk:X5", ""}}})
+	minetest.register_craft({
+		output = "fachwerk:"..idx.."8 4",
+		recipe = {
+			{"", "", ""},
 			{"fachwerk:X5", node, "fachwerk:X5"},
 			{"", "fachwerk:X5", ""}}})
 	minetest.register_craft({
@@ -214,23 +250,27 @@ if minetest.get_modpath("moreblocks") then
 		description="Fachwerk Pflaster",
 		groups={cracky=2, crumbly=2, choppy=2, not_in_creative_inventory=1},
 		tiles={"fachwerk_pflaster.png"},
+		sounds = default.node_sound_stone_defaults(),
 	})
 
 	stairsplus:register_all("fachwerk", "F", "fachwerk:F", {
 		description="Fachwerk Schindel 1",
 		groups={cracky=2, crumbly=2, choppy=2, not_in_creative_inventory=1},
 		tiles={"fachwerkF.png"},
+		sounds = default.node_sound_wood_defaults(),
 	})
 
 	stairsplus:register_all("fachwerk", "S", "fachwerk:S", {
 		description="Fachwerk Schindel 2",
 		groups={cracky=2, crumbly=2, choppy=2, not_in_creative_inventory=1},
 		tiles={"fachwerkS.png"},
+		sounds = default.node_sound_wood_defaults(),
 	})
 
 	stairsplus:register_all("fachwerk", "Z", "fachwerk:Z", {
 		description="Fachwerk Ziegel",
 		groups={cracky=2, crumbly=2, choppy=2, not_in_creative_inventory=1},
 		tiles={"fachwerkZ.png"},
+		sounds = default.node_sound_stone_defaults(),
 	})
 end
