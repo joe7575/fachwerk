@@ -40,6 +40,8 @@ for idx,png in ipairs(StonesPNG) do
 	register_node(idx.."6", name.." 6", {png.."^fachwerk7.png", png, png.."^fachwerk6.png", png.."^fachwerk6.png", png.."^fachwerk6.png^[transformFX" ,png.."^fachwerk6.png^[transformFX"})
 	register_node(idx.."7", name.." 7", {png.."^fachwerk7.png", png, png.."^fachwerk9.png", png.."^fachwerk9.png", png.."^fachwerk9.png^[transformFX" ,png.."^fachwerk9.png^[transformFX"})
 	register_node(idx.."8", name.." 8", {png, png, png.."^fachwerk10.png", png.."^fachwerk10.png", png.."^fachwerk10.png^[transformFX" ,png.."^fachwerk10.png^[transformFX"})
+	register_node(idx.."9", name.." 9", {png.."^fachwerk7.png", png, png.."^fachwerk5.png^fachwerk1.png", png.."^fachwerk5.png^fachwerk1.png", png.."^fachwerk5.png^fachwerk1.png" ,png.."^fachwerk5.png^fachwerk1.png"})
+	register_node(idx.."10", name.." 10", {png, png, png.."^fachwerk5.png^fachwerk3.png", png.."^fachwerk5.png^fachwerk3.png", png.."^fachwerk5.png^fachwerk3.png" ,png.."^fachwerk5.png^fachwerk3.png"})
 	
 	register_node(idx.."A", name.." A", {png, png, png.."^fachwerkA.png", png.."^fachwerkA.png^[transformFX", png.."^fachwerkA.png^[transformFX" ,png.."^fachwerkA.png"})
 	register_node(idx.."B", name.." B", {png, png, png.."^fachwerkB.png", png.."^fachwerkB.png^[transformFX", png.."^fachwerkB.png^[transformFX" ,png.."^fachwerkB.png"})
@@ -49,7 +51,7 @@ for idx,png in ipairs(StonesPNG) do
 end
 
 register_node("X5", " Beam", {"fachwerk7.png", "fachwerk8.png", "fachwerk7.png", "fachwerk8.png", "fachwerk7.png", "fachwerk8.png"})
-register_node("W", " Holzwand", {"fachwerkW.png", "fachwerkW.png","fachwerkW.png", "fachwerkW.png", "fachwerkW.png^[transformR90", "fachwerkW.png^[transformR90"})
+register_node("W", " Holzwand", {"fachwerkW.png", "fachwerkW.png","fachwerkW.png^[transformR90", "fachwerkW.png^[transformR90", "fachwerkW.png^[transformR90", "fachwerkW.png^[transformR90"})
 register_node("F", " Schindel 1", {"fachwerkF.png"})
 register_node("S", " Schindel 2", {"fachwerkS.png"})
 register_node("pflaster", " Pflaster", {"fachwerk_pflaster.png"})
@@ -104,8 +106,8 @@ minetest.register_node("fachwerk:window2", {
 minetest.register_craft({
 	output = "fachwerk:X5 8",
 	recipe = {
-		{"", "default:tree", "default:tree"},
-		{"", "default:tree", "default:tree"},
+		{"", "default:pine_tree", "default:pine_tree"},
+		{"", "default:pine_tree", "default:pine_tree"},
 		{"", "", ""},
 	}
 })
@@ -212,6 +214,20 @@ for idx,node in ipairs(StonesNode) do
 			{"", "", ""},
 			{"fachwerk:X5", node, "fachwerk:X5"},
 			{"", "fachwerk:X5", ""}}})
+	
+	minetest.register_craft({
+		output = "fachwerk:"..idx.."9 4",
+		recipe = {
+			{"", "", ""},
+			{"fachwerk:X5", node, "fachwerk:X5"},
+			{"fachwerk:X5", "", "fachwerk:X5"}}})
+	minetest.register_craft({
+		output = "fachwerk:"..idx.."10 4",
+		recipe = {
+			{"fachwerk:X5", "", "fachwerk:X5"},
+			{"fachwerk:X5", node, "fachwerk:X5"},
+			{"", "", ""}}})
+	
 	minetest.register_craft({
 		output = "fachwerk:"..idx.."A 2",
 		recipe = {
@@ -267,10 +283,24 @@ if minetest.get_modpath("moreblocks") then
 		sounds = default.node_sound_wood_defaults(),
 	})
 
+	stairsplus:register_all("fachwerk", "X5", "fachwerk:X5", {
+		description="Fachwerk Beam",
+		groups={cracky=2, crumbly=2, choppy=2, not_in_creative_inventory=1},
+		tiles={"fachwerk8.png"},
+		sounds = default.node_sound_wood_defaults(),
+	})
+	
 	stairsplus:register_all("fachwerk", "Z", "fachwerk:Z", {
 		description="Fachwerk Ziegel",
 		groups={cracky=2, crumbly=2, choppy=2, not_in_creative_inventory=1},
 		tiles={"fachwerkZ.png"},
 		sounds = default.node_sound_stone_defaults(),
+	})
+
+	stairsplus:register_all("fachwerk", "W", "fachwerk:W", {
+		description="Fachwerk Holzwand",
+		groups={cracky=2, crumbly=2, choppy=2, not_in_creative_inventory=1},
+		tiles={"fachwerkW.png"},
+		sounds = default.node_sound_wood_defaults(),
 	})
 end
