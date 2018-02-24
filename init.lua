@@ -151,7 +151,8 @@ minetest.register_craft({
 
 minetest.register_craft({
 	output = "fachwerk:pflaster 4",
-	recipe = {{"default:cobble", "default:desert_cobble", "default:sandstone", "default:gravel"}}
+	recipe = {{"default:cobble", "default:desert_cobble"}, 
+            {"default:sandstone", "default:gravel"}}
 })
 
 minetest.register_craft({
