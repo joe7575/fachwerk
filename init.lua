@@ -56,6 +56,7 @@ register_node("F", " Schindel 1", {"fachwerkF.png"})
 register_node("S", " Schindel 2", {"fachwerkS.png"})
 register_node("pflaster", " Pflaster", {"fachwerk_pflaster.png"})
 register_node("Z", " Ziegel", {"fachwerkZ.png"})
+register_node("bukki", " Bukkis", {'shingles_asphalt.png'}) ------------- Joe
 
 minetest.register_node("fachwerk:window1", {
 		description = "Fachwerk Window 1",
@@ -106,9 +107,9 @@ minetest.register_node("fachwerk:window2", {
 minetest.register_craft({
 	output = "fachwerk:X5 8",
 	recipe = {
-		{"", "default:pine_tree", "default:pine_tree"},
-		{"", "default:pine_tree", "default:pine_tree"},
+		{"default:pine_tree", "", "default:pine_tree"},
 		{"", "", ""},
+		{"default:pine_tree", "", "default:pine_tree"},
 	}
 })
 
@@ -122,12 +123,15 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output = "fachwerk:Z 2",
-	recipe = {
-		{"", "", ""},
-		{"default:clay_brick", "default:clay_brick", ""},
-		{"default:clay_brick", "default:clay_brick", ""},
-	}
+	type="shapeless",
+	output = "fachwerk:Z",
+	recipe = {"default:brick"}
+})
+
+minetest.register_craft({ ------------------- Joe
+	type="shapeless",
+	output = "fachwerk:bukki",
+	recipe = {"fachwerk:Z"}
 })
 
 minetest.register_craft({
@@ -302,6 +306,12 @@ if minetest.get_modpath("moreblocks") then
 		description="Fachwerk Holzwand",
 		groups={cracky=2, crumbly=2, choppy=2, not_in_creative_inventory=1},
 		tiles={"fachwerkW.png"},
+		sounds = default.node_sound_wood_defaults(),
+	})
+	stairsplus:register_all("fachwerk", "bukki", "fachwerk:bukki", { ------------------- Joe
+		description="Fachwerk Bukkis",
+		groups={cracky=2, crumbly=2, choppy=2, not_in_creative_inventory=1},
+		tiles={"shingles_asphalt.png"},
 		sounds = default.node_sound_wood_defaults(),
 	})
 end
