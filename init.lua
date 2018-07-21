@@ -57,7 +57,7 @@ register_node("S", " Schindel 2", {"fachwerkS.png"})
 register_node("pflaster", " Pflaster", {"fachwerk_pflaster.png"})
 register_node("Z", " Ziegel", {"fachwerkZ.png"})
 register_node("bukki", " Bukkis", {'shingles_asphalt.png'}) ------------- Joe
-register_node("reet", " Reet", {'reet.png'}) ------------- Joe
+register_node("reet", " Reet", {'fachwerk_reet.png'}) ------------- Joe
 
 minetest.register_node("fachwerk:window1", {
 		description = "Fachwerk Window 1",
