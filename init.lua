@@ -324,7 +324,53 @@ if minetest.get_modpath("moreblocks") then
 	stairsplus:register_all("fachwerk", "reet", "fachwerk:reet", { ------------------- Joe
 		description="Fachwerk Reet",
 		groups={cracky=2, crumbly=2, choppy=2, not_in_creative_inventory=1},
-		tiles={"reet.png"},
+		tiles={"fachwerk_reet.png"},
 		sounds = default.node_sound_wood_defaults(),
 	})
 end
+
+
+------------------- Joe
+minetest.register_node("fachwerk:cherry_leaves", {
+    description = "Cherry Leaves",
+	drawtype = "plantlike",
+	tiles = {"fachwerk_cherry_leaves2.png"},
+	--special_tiles = {"fachwerk_cherry_leaves.png"},
+	inventory_image = "fachwerk_cherry_leaves.png",
+	wield_image = "fachwerk_cherry_leaves.png",
+	visual_scale = 1.4,
+	walkable = true,
+	waving = 1,
+	paramtype = "light",
+	is_ground_content = false,
+	groups = {snappy = 3, leafdecay = 3, flammable = 2, leaves = 1},
+	sounds = default.node_sound_leaves_defaults(),
+
+})
+
+minetest.register_node("fachwerk:cherry_leaves2", {
+    description = "Cherry Leaves",
+	drawtype = "allfaces_optional",
+	tiles = {"fachwerk_cherry_leaves.png"},
+	--special_tiles = {"fachwerk_cherry_leaves.png"},
+	walkable = true,
+	waving = 1,
+	paramtype = "light",
+	is_ground_content = false,
+	groups = {snappy = 3, leafdecay = 3, flammable = 2, leaves = 1},
+	sounds = default.node_sound_leaves_defaults(),
+
+})
+
+minetest.register_craft({
+	type = "shapeless",
+	output = "fachwerk:cherry_leaves",
+	recipe = {"default:leaves"},
+})
+
+minetest.register_craft({
+	type = "shapeless",
+	output = "fachwerk:cherry_leaves2",
+	recipe = {"fachwerk:cherry_leaves"},
+})
+------------------- Joe
