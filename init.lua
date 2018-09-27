@@ -32,6 +32,7 @@ local StonesNode = {"default:silver_sandstone", "default:desert_sandstone", "def
 for idx,png in ipairs(StonesPNG) do
 	name = StonesName[idx]
 										-- up, down, right, left, back, front
+	register_node(idx.."0", name.." 0", {png, png, png, png, png, png})
 	register_node(idx.."1", name.." 1", {png.."^fachwerk7.png", png, png.."^fachwerk1.png", png.."^fachwerk1.png", png.."^fachwerk1.png^[transformFX" ,png.."^fachwerk1.png^[transformFX"})
 	register_node(idx.."2", name.." 2", {png, png, png.."^fachwerk2.png", png.."^fachwerk2.png", png.."^fachwerk2.png^[transformFX" ,png.."^fachwerk2.png^[transformFX"})
 	register_node(idx.."3", name.." 3", {png, png, png.."^fachwerk3.png", png.."^fachwerk3.png", png.."^fachwerk3.png^[transformFX" ,png.."^fachwerk3.png^[transformFX"})
@@ -62,22 +63,37 @@ register_node("reet", " Reet", {'fachwerk_reet.png'}) ------------- Joe
 minetest.register_node("fachwerk:window1", {
 		description = "Fachwerk Window 1",
 		drawtype = "nodebox",
-		tiles = {"fachwerk_win1.png"},
+		tiles = {
+			"fachwerk_win1_frame.png",
+			"fachwerk_win1_frame.png",
+			"fachwerk_win1_frame.png^[transformR90",
+			"fachwerk_win1_frame.png^[transformR90",
+			"fachwerk_win1.png",
+			"fachwerk_win1.png",
+		},
 		paramtype = "light",
 		paramtype2 = "facedir",
 		groups = {cracky=2, crumbly=2, choppy=2},
 		node_box = {
 			type = "fixed",
 			fixed = {
-				{ -0.5, -0.5, -0.1,  0.5, 0.5,  0.1},
+				{ -8/16, -8/16, -1/32,  8/16,  8/16,  1/32}, -- glass
+				{ -8/16,  6/16, -1/16,  8/16,  8/16,  1/16}, -- top
+				{ -8/16, -8/16, -1/16,  8/16, -6/16,  1/16}, -- bottom
+				{ -8/16, -8/16, -1/16, -6/16,  8/16,  1/16}, -- left
+				{  6/16, -8/16, -1/16,  8/16,  8/16,  1/16}, -- right
 			},
 		},
 		selection_box = {
 			type = "fixed",
 			fixed = {
-				{ -0.5, -0.5, -0.1,  0.5, 0.5,  0.1},
+				{ -0.5, -0.5, -1/16,  0.5, 0.5, 1/16},
 			},
 		},
+		use_texture_alpha = true,
+		paramtype = "light",
+		light_source = 0,	
+		sunlight_propagates = true,
 		is_ground_content = false,
 		sounds = default.node_sound_wood_defaults(),
 })
@@ -85,22 +101,37 @@ minetest.register_node("fachwerk:window1", {
 minetest.register_node("fachwerk:window2", {
 		description = "Fachwerk Window 4",
 		drawtype = "nodebox",
-		tiles = {"fachwerk_win2.png"},
+		tiles = {
+			"fachwerk_win2_frame.png",
+			"fachwerk_win2_frame.png",
+			"fachwerk_win2_frame.png^[transformR90",
+			"fachwerk_win2_frame.png^[transformR90",
+			"fachwerk_win2.png",
+			"fachwerk_win2.png",
+		},
 		paramtype = "light",
 		paramtype2 = "facedir",
 		groups = {cracky=2, crumbly=2, choppy=2},
 		node_box = {
 			type = "fixed",
 			fixed = {
-				{ -0.5, -0.5, -0.1,  0.5, 0.5,  0.1},
+				{ -8/16, -8/16, -1/32,  8/16,  8/16,  1/32}, -- glass
+				{ -8/16,  6/16, -1/16,  8/16,  8/16,  1/16}, -- top
+				{ -8/16, -8/16, -1/16,  8/16, -6/16,  1/16}, -- bottom
+				{ -8/16, -8/16, -1/16, -6/16,  8/16,  1/16}, -- left
+				{  6/16, -8/16, -1/16,  8/16,  8/16,  1/16}, -- right
 			},
 		},
 		selection_box = {
 			type = "fixed",
 			fixed = {
-				{ -0.5, -0.5, -0.1,  0.5, 0.5,  0.1},
+				{ -0.5, -0.5, -1/16,  0.5, 0.5, 1/16},
 			},
 		},
+		use_texture_alpha = true,
+		paramtype = "light",
+		light_source = 0,	
+		sunlight_propagates = true,
 		is_ground_content = false,
 		sounds = default.node_sound_wood_defaults(),
 })
@@ -374,3 +405,33 @@ minetest.register_craft({
 	recipe = {"fachwerk:cherry_leaves"},
 })
 ------------------- Joe
+
+-- Screwdriver mod
+if minetest.get_modpath("screwdriver") then
+
+	if screwdriver and screwdriver.handler then
+		minetest.register_tool("fachwerk:screwdriver_diamond", {
+			description = "Diamond Screwdriver",
+			inventory_image = "fachwerk_screwdriver.png",
+
+			on_use = function(itemstack, user, pointed_thing)
+				screwdriver.handler(itemstack, user, pointed_thing, screwdriver.ROTATE_FACE, 1200)
+				return itemstack
+			end,
+
+			on_place = function(itemstack, user, pointed_thing)
+				screwdriver.handler(itemstack, user, pointed_thing, screwdriver.ROTATE_AXIS, 1200)
+				return itemstack
+			end,
+		})
+	
+		minetest.register_craft({
+			output = "fachwerk:screwdriver_diamond",
+			recipe = {
+				{"", "default:diamond", ""},
+				{"", "default:stick", ""},
+				{"", "", ""},
+			},
+		})
+	end
+end
