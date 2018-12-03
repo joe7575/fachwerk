@@ -57,8 +57,6 @@ register_node("F", " Schindel 1", {"fachwerkF.png"})
 register_node("S", " Schindel 2", {"fachwerkS.png"})
 register_node("pflaster", " Pflaster", {"fachwerk_pflaster.png"})
 register_node("Z", " Ziegel", {"fachwerkZ.png"})
-register_node("bukki", " Bukkis", {'shingles_asphalt.png'}) ------------- Joe
-register_node("reet", " Reet", {'fachwerk_reet.png'}) ------------- Joe
 
 minetest.register_node("fachwerk:window1", {
 		description = "Fachwerk Window 1",
@@ -160,18 +158,6 @@ minetest.register_craft({
 	recipe = {"default:brick"}
 })
 
-minetest.register_craft({ ------------------- Joe
-	type="shapeless",
-	output = "fachwerk:bukki",
-	recipe = {"fachwerk:Z"}
-})
-
-minetest.register_craft({ ------------------- Joe
-	type="shapeless",
-	output = "fachwerk:reet",
-	recipe = {"farming:straw"}
-})
-
 minetest.register_craft({
 	output = "fachwerk:W 4",
 	recipe = {
@@ -209,6 +195,12 @@ minetest.register_craft({
 
 
 for idx,node in ipairs(StonesNode) do
+	minetest.register_craft({
+		output = "fachwerk:"..idx.."0 2",
+		recipe = {
+			{"", "fachwerk:"..idx.."3", ""},
+			{"", "fachwerk:"..idx.."1", ""},
+			{"", "", ""}}})
 	minetest.register_craft({
 		output = "fachwerk:"..idx.."1 2",
 		recipe = {
@@ -346,92 +338,4 @@ if minetest.get_modpath("moreblocks") then
 		tiles={"fachwerkW.png"},
 		sounds = default.node_sound_wood_defaults(),
 	})
-	stairsplus:register_all("fachwerk", "bukki", "fachwerk:bukki", { ------------------- Joe
-		description="Fachwerk Bukkis",
-		groups={cracky=2, crumbly=2, choppy=2, not_in_creative_inventory=1},
-		tiles={"shingles_asphalt.png"},
-		sounds = default.node_sound_wood_defaults(),
-	})
-	stairsplus:register_all("fachwerk", "reet", "fachwerk:reet", { ------------------- Joe
-		description="Fachwerk Reet",
-		groups={cracky=2, crumbly=2, choppy=2, not_in_creative_inventory=1},
-		tiles={"fachwerk_reet.png"},
-		sounds = default.node_sound_wood_defaults(),
-	})
-end
-
-
-------------------- Joe
-minetest.register_node("fachwerk:cherry_leaves", {
-    description = "Cherry Leaves",
-	drawtype = "plantlike",
-	tiles = {"fachwerk_cherry_leaves2.png"},
-	--special_tiles = {"fachwerk_cherry_leaves.png"},
-	inventory_image = "fachwerk_cherry_leaves.png",
-	wield_image = "fachwerk_cherry_leaves.png",
-	visual_scale = 1.4,
-	walkable = true,
-	waving = 1,
-	paramtype = "light",
-	is_ground_content = false,
-	groups = {snappy = 3, leafdecay = 3, flammable = 2, leaves = 1},
-	sounds = default.node_sound_leaves_defaults(),
-
-})
-
-minetest.register_node("fachwerk:cherry_leaves2", {
-    description = "Cherry Leaves",
-	drawtype = "allfaces_optional",
-	tiles = {"fachwerk_cherry_leaves.png"},
-	--special_tiles = {"fachwerk_cherry_leaves.png"},
-	walkable = true,
-	waving = 1,
-	paramtype = "light",
-	is_ground_content = false,
-	groups = {snappy = 3, leafdecay = 3, flammable = 2, leaves = 1},
-	sounds = default.node_sound_leaves_defaults(),
-
-})
-
-minetest.register_craft({
-	type = "shapeless",
-	output = "fachwerk:cherry_leaves",
-	recipe = {"default:leaves"},
-})
-
-minetest.register_craft({
-	type = "shapeless",
-	output = "fachwerk:cherry_leaves2",
-	recipe = {"fachwerk:cherry_leaves"},
-})
-------------------- Joe
-
--- Screwdriver mod
-if minetest.get_modpath("screwdriver") then
-
-	if screwdriver and screwdriver.handler then
-		minetest.register_tool("fachwerk:screwdriver_diamond", {
-			description = "Diamond Screwdriver",
-			inventory_image = "fachwerk_screwdriver.png",
-
-			on_use = function(itemstack, user, pointed_thing)
-				screwdriver.handler(itemstack, user, pointed_thing, screwdriver.ROTATE_FACE, 1200)
-				return itemstack
-			end,
-
-			on_place = function(itemstack, user, pointed_thing)
-				screwdriver.handler(itemstack, user, pointed_thing, screwdriver.ROTATE_AXIS, 1200)
-				return itemstack
-			end,
-		})
-	
-		minetest.register_craft({
-			output = "fachwerk:screwdriver_diamond",
-			recipe = {
-				{"", "default:diamond", ""},
-				{"", "default:stick", ""},
-				{"", "", ""},
-			},
-		})
-	end
 end
