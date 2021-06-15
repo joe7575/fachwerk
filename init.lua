@@ -17,8 +17,6 @@ local function register_node(name, desc, tiles)
 		description = "Fachwerk "..desc,
 		tiles = tiles,
 		paramtype = "light",
-		light_source = 0,	
-		sunlight_propagates = true,
 		paramtype2 = "facedir",
 		groups = {cracky=2, crumbly=2, choppy=2},
 		is_ground_content = false,
@@ -26,7 +24,7 @@ local function register_node(name, desc, tiles)
 	})
 end
 
-local StonesPNG = {"fachwerk_silver_sandstone.png", "fachwerk_desert_sandstone.png", "fachwerk_desert_stone.png", "default_brick.png"}
+local StonesPNG = {"fachwerk_silver_sandstone.png", "fachwerk_desert_sandstone.png", "fachwerk_desert_stone.png", "fachwerk_brick.png"}
 local StonesName = {"Silver Sandstone", "Desert Sandstone", "Desert Stone", "Brick Block"}
 local StonesNode = {"default:silver_sandstone", "default:desert_sandstone", "default:desert_stone", "default:brick"}
 for idx,png in ipairs(StonesPNG) do
@@ -56,7 +54,24 @@ register_node("W", " Holzwand", {"fachwerkW.png", "fachwerkW.png","fachwerkW.png
 register_node("F", " Schindel 1", {"fachwerkF.png"})
 register_node("S", " Schindel 2", {"fachwerkS.png"})
 register_node("pflaster", " Pflaster", {"fachwerk_pflaster.png"})
-register_node("Z", " Ziegel", {"fachwerkZ.png"})
+register_node("Z", " Dachziegel", {"fachwerkZ.png"})
+register_node("B", " ZiegelStein", {"fachwerk_brick.png"})
+register_node("NM", " Natursteinmauer", {
+		"fachwerk_stone_wall.png", 
+		"fachwerk_stone_wall.png", 
+		"fachwerk_stone_wall1.png",
+		"fachwerk_stone_wall2.png", 
+		"fachwerk_stone_wall3.png", 
+		"fachwerk_stone_wall4.png"})
+
+register_node("NE", "Natursteinecke", {
+		-- up, down, right, left, back, front
+		"fachwerk_stone_wall.png", 
+		"fachwerk_stone_wall.png", 
+		"fachwerk_stone_edge2.png^[transformFX",
+		"fachwerk_stone_edge1.png", 
+		"fachwerk_stone_edge1.png^[transformFX", 
+		"fachwerk_stone_edge2.png"})
 
 minetest.register_node("fachwerk:window1", {
 		description = "Fachwerk Window 1",
@@ -89,8 +104,6 @@ minetest.register_node("fachwerk:window1", {
 			},
 		},
 		use_texture_alpha = true,
-		paramtype = "light",
-		light_source = 0,	
 		sunlight_propagates = true,
 		is_ground_content = false,
 		sounds = default.node_sound_wood_defaults(),
@@ -155,7 +168,16 @@ minetest.register_craft({
 minetest.register_craft({
 	type="shapeless",
 	output = "fachwerk:Z",
-	recipe = {"default:brick"}
+	recipe = {"fachwerk:B"}
+})
+
+minetest.register_craft({
+	output = "fachwerk:B 2",
+	recipe = {
+		{"default:clay_brick", "default:clay_brick", "default:clay_brick"},
+		{"default:clay_brick", "default:clay_brick", "default:clay_brick"},
+		{"default:clay_brick", "default:clay_brick", "default:clay_brick"},
+	}
 })
 
 minetest.register_craft({
@@ -181,6 +203,16 @@ minetest.register_craft({
 	output = "fachwerk:pflaster 4",
 	recipe = {{"default:cobble", "default:desert_cobble"}, 
             {"default:sandstone", "default:gravel"}}
+})
+
+minetest.register_craft({
+	output = "fachwerk:NM",
+	recipe = {{"fachwerk:pflaster"}}
+})
+
+minetest.register_craft({
+	output = "fachwerk:NE",
+	recipe = {{"fachwerk:NM"}}
 })
 
 minetest.register_craft({
@@ -326,16 +358,54 @@ if minetest.get_modpath("moreblocks") then
 	})
 	
 	stairsplus:register_all("fachwerk", "Z", "fachwerk:Z", {
-		description="Fachwerk Ziegel",
+		description="Fachwerk Dachziegel",
 		groups={cracky=2, crumbly=2, choppy=2, not_in_creative_inventory=1},
 		tiles={"fachwerkZ.png"},
 		sounds = default.node_sound_stone_defaults(),
 	})
 
+	stairsplus:register_all("fachwerk", "B", "fachwerk:B", {
+		description="Fachwerk Ziegelstein",
+		groups={cracky=2, crumbly=2, choppy=2, not_in_creative_inventory=1},
+		tiles={"fachwerk_brick.png"},
+		sounds = default.node_sound_stone_defaults(),
+	})
+	
 	stairsplus:register_all("fachwerk", "W", "fachwerk:W", {
 		description="Fachwerk Holzwand",
 		groups={cracky=2, crumbly=2, choppy=2, not_in_creative_inventory=1},
 		tiles={"fachwerkW.png"},
 		sounds = default.node_sound_wood_defaults(),
 	})
+
+	stairsplus:register_all("fachwerk", "NM", "fachwerk:NM", {
+		description="Fachwerk Natursteinmauer",
+		groups={cracky=2, crumbly=2, choppy=2, not_in_creative_inventory=1},
+		tiles={
+			"fachwerk_stone_wall.png", 
+			"fachwerk_stone_wall.png", 
+			"fachwerk_stone_wall1.png",
+			"fachwerk_stone_wall2.png", 
+			"fachwerk_stone_wall3.png", 
+			"fachwerk_stone_wall4.png"
+		},
+		sounds = default.node_sound_wood_defaults(),
+	})
+
+	stairsplus:register_all("fachwerk", "NE", "fachwerk:NE", {
+		description="Fachwerk Natursteinecke",
+		groups={cracky=2, crumbly=2, choppy=2, not_in_creative_inventory=1},
+		tiles={
+		"fachwerk_stone_wall.png", 
+		"fachwerk_stone_wall.png", 
+		"fachwerk_stone_edge2.png^[transformFX",
+		"fachwerk_stone_edge1.png", 
+		"fachwerk_stone_edge1.png^[transformFX", 
+		"fachwerk_stone_edge2.png",
+		},
+		sounds = default.node_sound_wood_defaults(),
+	})
 end
+
+-- not needed
+minetest.unregister_item("fachwerk:40")
