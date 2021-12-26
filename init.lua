@@ -2,12 +2,9 @@
 
 	Fachwerk
 
-	Copyright (C) 2017 Joachim Stolberg
+	Copyright (C) 2017-2022 Joachim Stolberg
 	LGPLv2.1+
 	See LICENSE.txt for more information
-
-	History:
-	2017-12-10  v0.01  first version
 
 ]]--
 
