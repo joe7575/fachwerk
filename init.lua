@@ -324,7 +324,7 @@ for idx,node in ipairs(StonesNode) do
 			{"fachwerk:X5", "", "fachwerk:X5"}}})
 end	
 
-if minetest.get_modpath("moreblocks") then
+if minetest.global_exists("moreblocks") and minetest.global_exists("stairsplus") then
 	
 	stairsplus:register_all("fachwerk", "pflaster", "fachwerk:pflaster", {
 		description="Fachwerk Pflaster",
