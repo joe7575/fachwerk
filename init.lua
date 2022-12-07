@@ -18,6 +18,7 @@ local function register_node(name, desc, tiles)
 		groups = {cracky=2, crumbly=2, choppy=2},
 		is_ground_content = false,
 		sounds = default.node_sound_wood_defaults(),
+		place_param2 = 0,
 	})
 end
 
