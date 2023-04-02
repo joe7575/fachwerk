@@ -2,7 +2,7 @@
 
 Add some blocks to build half-timbered houses (Fachwerkhäuser)
 
-![Seite1](textures/screenshot.png)
+![screenshot](screenshot.png)
 
 ## Dependencies
 default  
