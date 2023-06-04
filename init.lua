@@ -13,7 +13,6 @@ local function register_node(name, desc, tiles)
 	minetest.register_node("fachwerk:"..name, {
 		description = "Fachwerk "..desc,
 		tiles = tiles,
-		paramtype = "light",
 		paramtype2 = "facedir",
 		groups = {cracky=2, crumbly=2, choppy=2},
 		is_ground_content = false,
