@@ -24,7 +24,7 @@ local StonesPNG = {"fachwerk_silver_sandstone.png", "fachwerk_desert_sandstone.p
 local StonesName = {"Silver Sandstone", "Desert Sandstone", "Desert Stone", "Brick Block"}
 local StonesNode = {"default:silver_sandstone", "default:desert_sandstone", "default:desert_stone", "default:brick"}
 for idx,png in ipairs(StonesPNG) do
-	name = StonesName[idx]
+	local name = StonesName[idx]
 										-- up, down, right, left, back, front
 	register_node(idx.."0", name.." 0", {png, png, png, png, png, png})
 	register_node(idx.."1", name.." 1", {png.."^fachwerk7.png", png, png.."^fachwerk1.png", png.."^fachwerk1.png", png.."^fachwerk1.png^[transformFX" ,png.."^fachwerk1.png^[transformFX"})
@@ -136,7 +136,6 @@ minetest.register_node("fachwerk:window2", {
 			},
 		},
 		use_texture_alpha = "blend",
-		paramtype = "light",
 		light_source = 0,	
 		sunlight_propagates = true,
 		is_ground_content = false,
